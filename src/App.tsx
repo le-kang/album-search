@@ -17,7 +17,7 @@ export default function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route exact path="/album">
+          <Route exact path="/album/:albumId">
             <AlbumPage />
           </Route>
           <Route path="*">

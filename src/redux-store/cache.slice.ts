@@ -31,9 +31,14 @@ const cacheSlice = createSlice({
       })
     })
     builder.addCase(getSongs.fulfilled, (state, action) => {
-      const { albumId, songs } = action.payload
+      const { album, songs } = action.payload
+      // update fetched album in cached albums in case this album was not
+      // appeared in the search result
+      state.cachedAlbums[album.collectionId] = album
       // update fetched album with a list of song trackId
-      state.cachedAlbums[albumId]['songs'] = songs.map((song) => song.trackId)
+      state.cachedAlbums[album.collectionId]['songs'] = songs.map(
+        (song) => song.trackId
+      )
       // add songs to cached songs
       songs.forEach((song) => {
         state.cachedSongs[song.trackId] = song

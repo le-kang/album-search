@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { SongData } from './../types'
+import { AlbumData, SongData } from './../types'
 
 const API_URL = 'https://itunes.apple.com/lookup?country=AU&entity=song&id='
 
@@ -20,11 +20,15 @@ export const getSongs = createAsyncThunk(
     const response = await fetch(API_URL + encodeURIComponent(albumId))
     const data = JSON.parse(await response.text()) as {
       resultCount: number
-      results: SongData[]
+      results: (AlbumData | SongData)[]
     }
     return {
-      albumId,
-      songs: data.results.filter((entity) => entity.wrapperType === 'track'),
+      album: data.results.find(
+        (entity) => entity.wrapperType === 'collection'
+      )! as AlbumData,
+      songs: data.results.filter(
+        (entity) => entity.wrapperType === 'track'
+      ) as SongData[],
     }
   }
 )

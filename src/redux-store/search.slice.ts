@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 import { AlbumData } from './../types'
 
@@ -32,7 +32,11 @@ export const searchAlbum = createAsyncThunk(
 const searchSlice = createSlice({
   name: 'search',
   initialState,
-  reducers: {},
+  reducers: {
+    updateSearchTerm: (state, action: PayloadAction<string>) => {
+      state.term = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(searchAlbum.pending, (state) => {
       state.searching = true
@@ -43,5 +47,7 @@ const searchSlice = createSlice({
     })
   },
 })
+
+export const { updateSearchTerm } = searchSlice.actions
 
 export default searchSlice.reducer

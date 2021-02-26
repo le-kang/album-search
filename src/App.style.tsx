@@ -14,12 +14,11 @@ export const Main = styled.main`
   flex-grow: 1;
   padding: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 `
 
 export const Footer = styled.footer`
-  background-color: rgba(255, 255, 255, 0.7);
   text-align: center;
   padding: 1rem;
 `
