@@ -20,7 +20,7 @@ const initialState: Search = {
   results: [],
 }
 
-const processSearchKeywords = (keywords: string) =>
+export const processSearchKeywords = (keywords: string) =>
   keywords
     .split(' ')
     .filter((word) => !!word)
@@ -64,6 +64,8 @@ const searchSlice = createSlice({
   reducers: {
     updateSearchTerm: (state, action: PayloadAction<string>) => {
       state.term = action.payload
+      // clear search results if term is changed
+      state.results = []
     },
   },
   extraReducers: (builder) => {

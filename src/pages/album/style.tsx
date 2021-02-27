@@ -9,9 +9,20 @@ import {
   ReleaseDate,
 } from '../../components/album-overview/style'
 
-export const AlbumDetails = styled.div`
+export const BackToSearch = styled.div`
   width: 90%;
   max-width: 1000px;
+  padding: 1rem 0;
+  color: var(--primary-color);
+  font-weight: bold;
+`
+
+export const AlbumDetails = styled.div`
+  flex: 1;
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
 
   ${mediaQueries('md')(css`
     ${AlbumInfo} {
@@ -49,17 +60,11 @@ export const AlbumDetails = styled.div`
 `
 
 export const SongList = styled.div`
-  display: grid;
-  grid-template-columns: 25px 1fr 50px;
-  margin: 2rem 0;
+  flex-grow: 1;
   border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--border-color);
-  row-gap: 1px;
+  margin-top: 2rem;
+`
 
-  div {
-    padding: 1rem 0;
-    width: 100%;
-    background-color: white;
-  }
+export const ExtraInfo = styled.div`
+  color: grey;
 `

@@ -30,9 +30,11 @@ export const SearchForm = styled.form`
 export const SearchInput = styled.input`
   height: 50px;
   flex-grow: 1;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   border: none;
   outline: none;
+  color: var(--primary-color);
+  font-weight: bold;
 `
 
 export const SearchButton = styled.button`

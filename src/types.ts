@@ -24,4 +24,5 @@ export type SongData = EntityData & {
 export type AlbumData = EntityData & {
   wrapperType: 'collection'
   songs?: SongData[]
+  copyright: string
 }

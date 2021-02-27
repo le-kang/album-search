@@ -3,7 +3,7 @@ import { createGlobalStyle, css } from 'styled-components'
 export default createGlobalStyle`
   :root {
     --primary-color: #4F58DF;
-    --secondary-color: #FF671A;
+    --secondary-color: #FA233B;
     --border-color: #DCDCDC;
     --box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%), 0 10px 13px 0 rgb(0 0 0 / 11%);
   }
