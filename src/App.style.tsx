@@ -17,8 +17,3 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
 `
-
-export const Footer = styled.footer`
-  text-align: center;
-  padding: 1rem;
-`

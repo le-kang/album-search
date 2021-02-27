@@ -1,9 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
-import { AlbumData } from './../types'
+import { AlbumData, SongData } from './../types'
 
-const API_URL =
+const ALBUM_API_URL =
   'https://itunes.apple.com/search?attribute=albumTerm&entity=album&country=AU&term='
+
+const SONG_API_URL =
+  'https://itunes.apple.com/lookup?country=AU&entity=song&id='
 
 type Search = {
   term: string
@@ -17,15 +20,41 @@ const initialState: Search = {
   results: [],
 }
 
-export const searchAlbum = createAsyncThunk(
-  'search/getAlbumData',
+const processSearchKeywords = (keywords: string) =>
+  keywords
+    .split(' ')
+    .filter((word) => !!word)
+    .join('+')
+
+export const searchAlbums = createAsyncThunk(
+  'search/Albums',
   async (term: string) => {
-    const response = await fetch(API_URL + encodeURIComponent(term))
+    term = processSearchKeywords(term)
+    const response = await fetch(ALBUM_API_URL + term)
     const data = JSON.parse(await response.text()) as {
       resultCount: number
       results: AlbumData[]
     }
     return { term, results: data.results }
+  }
+)
+
+export const searchAlbumWithSongs = createAsyncThunk(
+  'search/AlbumWithSongs',
+  async (albumId: number) => {
+    const response = await fetch(SONG_API_URL + encodeURIComponent(albumId))
+    const data = JSON.parse(await response.text()) as {
+      resultCount: number
+      results: (AlbumData | SongData)[]
+    }
+    return {
+      album: data.results.find(
+        (entity) => entity.wrapperType === 'collection'
+      )! as AlbumData,
+      songs: data.results.filter(
+        (entity) => entity.wrapperType === 'track'
+      ) as SongData[],
+    }
   }
 )
 
@@ -38,10 +67,10 @@ const searchSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(searchAlbum.pending, (state) => {
+    builder.addCase(searchAlbums.pending, (state) => {
       state.searching = true
     })
-    builder.addCase(searchAlbum.fulfilled, (state, action) => {
+    builder.addCase(searchAlbums.fulfilled, (state, action) => {
       state.results = action.payload.results
       state.searching = false
     })

@@ -4,7 +4,7 @@ import HomePage from './pages/home'
 import AlbumPage from './pages/album'
 import NoMatchPage from './pages/no-match'
 
-import { Header, Main, Footer } from './App.style'
+import { Header, Main } from './App.style'
 
 export default function App() {
   return (
@@ -25,9 +25,6 @@ export default function App() {
           </Route>
         </Switch>
       </Main>
-      <Footer>
-        &copy; Le Kang {new Date().getFullYear()} All rights reserved.
-      </Footer>
     </>
   )
 }

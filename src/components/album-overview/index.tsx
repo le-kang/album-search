@@ -3,23 +3,30 @@ import dayjs from 'dayjs'
 
 import { AlbumData } from '../../types'
 
-import { AlbumContainer, Cover, Title, Artist, ReleaseDate } from './style'
+import { AlbumInfo, Cover, Title, Artist, ReleaseDate } from './style'
 
 type AlbumProps = {
   album: AlbumData
 }
 
-export default function Album({ album }: AlbumProps) {
+export default function AlbumOverview({ album }: AlbumProps) {
   const routeMatch = useRouteMatch()
-  console.log(routeMatch)
+  const AlbumLink = ({ children }: { children: React.ReactNode }) =>
+    routeMatch.path === '/' ? (
+      <Link to={`/album/${album.collectionId}`}>{children}</Link>
+    ) : (
+      <a href={album.collectionViewUrl} target="_blank" rel="noreferrer">
+        {children}
+      </a>
+    )
 
   return (
-    <AlbumContainer>
-      <Link to={`/album/${album.collectionId}`}>
-        <Cover>
+    <AlbumInfo>
+      <Cover>
+        <AlbumLink>
           <img src={album.artworkUrl100} alt="Album Cover" />
-        </Cover>
-      </Link>
+        </AlbumLink>
+      </Cover>
       <Title title={album.collectionName}>{album.collectionName}</Title>
       <Artist
         href={album.artistViewUrl}
@@ -32,6 +39,6 @@ export default function Album({ album }: AlbumProps) {
       <ReleaseDate dateTime={album.releaseDate}>
         {dayjs(album.releaseDate).format('DD MMM YYYY')}
       </ReleaseDate>
-    </AlbumContainer>
+    </AlbumInfo>
   )
 }

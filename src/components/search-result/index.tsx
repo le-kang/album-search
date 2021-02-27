@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks'
 import Spinner from '../spinner'
-import Album from '../album'
+import AlbumOverview from '../album-overview'
 
 import { ResultContainer } from './style'
 
@@ -12,7 +12,7 @@ export default function SearchResult() {
       {search.searching && <Spinner />}
       {!search.searching &&
         search.results.map((album) => (
-          <Album key={album.collectionId} album={album} />
+          <AlbumOverview key={album.collectionId} album={album} />
         ))}
     </ResultContainer>
   )

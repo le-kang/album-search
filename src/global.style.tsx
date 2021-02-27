@@ -5,7 +5,7 @@ export default createGlobalStyle`
     --primary-color: #4F58DF;
     --secondary-color: #FF671A;
     --border-color: #DCDCDC;
-    --box-shadow: 1px 1px 8px 1px #DCDCDC;
+    --box-shadow: 0 4px 8px 0 rgb(0 0 0 / 10%), 0 10px 13px 0 rgb(0 0 0 / 11%);
   }
 
   body {

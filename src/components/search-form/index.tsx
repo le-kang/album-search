@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 
 import { useAppSelector, useAppDispatch } from '../../hooks'
-import { updateSearchTerm, searchAlbum } from '../../redux-store/search.slice'
+import { updateSearchTerm, searchAlbums } from '../../redux-store/search.slice'
 
 import { SearchBar, SearchForm, SearchInput, SearchButton } from './style'
 
@@ -14,7 +14,7 @@ export default function SearchBox() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    dispatch(searchAlbum(searchTerm))
+    dispatch(searchAlbums(searchTerm))
   }
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {

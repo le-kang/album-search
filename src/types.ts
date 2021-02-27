@@ -11,16 +11,17 @@ type EntityData = {
   primaryGenreName: string
 }
 
-export type AlbumData = EntityData & {
-  wrapperType: 'collection'
-  songs?: number[]
-}
-
 export type SongData = EntityData & {
   wrapperType: 'track'
   trackId: number
+  trackName: string
   trackNumber: number
   trackCensoredName: string
   trackTimeMillis: number
   previewUrl?: string
+}
+
+export type AlbumData = EntityData & {
+  wrapperType: 'collection'
+  songs?: SongData[]
 }

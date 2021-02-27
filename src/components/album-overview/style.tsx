@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const AlbumContainer = styled.article`
+export const AlbumInfo = styled.article`
   display: flex;
   flex-direction: column;
 `
@@ -25,7 +25,7 @@ export const Cover = styled.div`
 
 export const Title = styled.h2`
   padding: 0;
-  margin: 0.25rem 0 0;
+  margin: 0.5rem 0 0;
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -33,7 +33,7 @@ export const Title = styled.h2`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.1rem;
-  min-height: 2.2rem;
+  height: 2.2rem;
 `
 
 export const Artist = styled.a`

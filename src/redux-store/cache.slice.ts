@@ -1,19 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { AlbumData, SongData } from './../types'
-import { searchAlbum } from './search.slice'
-import { getSongs } from './album.slice'
+import { AlbumData } from './../types'
+import { searchAlbums, searchAlbumWithSongs } from './search.slice'
 
 type Cache = {
   searchHistory: { [key: string]: number[] }
   cachedAlbums: { [key: number]: AlbumData }
-  cachedSongs: { [key: number]: SongData }
 }
 
 const initialState: Cache = {
   searchHistory: {},
   cachedAlbums: {},
-  cachedSongs: {},
 }
 
 const cacheSlice = createSlice({
@@ -21,7 +18,7 @@ const cacheSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(searchAlbum.fulfilled, (state, action) => {
+    builder.addCase(searchAlbums.fulfilled, (state, action) => {
       const { term, results } = action.payload
       // add search results into history after a new search is fulfilled
       state.searchHistory[term] = results.map((album) => album.collectionId)
@@ -30,19 +27,15 @@ const cacheSlice = createSlice({
         state.cachedAlbums[album.collectionId] = album
       })
     })
-    builder.addCase(getSongs.fulfilled, (state, action) => {
+    builder.addCase(searchAlbumWithSongs.fulfilled, (state, action) => {
       const { album, songs } = action.payload
-      // update fetched album in cached albums in case this album was not
+      // update fetched album in cached albums in case this album was never
       // appeared in the search result
       state.cachedAlbums[album.collectionId] = album
-      // update fetched album with a list of song trackId
-      state.cachedAlbums[album.collectionId]['songs'] = songs.map(
-        (song) => song.trackId
+      // update fetched album with its songs
+      state.cachedAlbums[album.collectionId]['songs'] = songs.sort(
+        (a, b) => a.trackNumber - b.trackNumber
       )
-      // add songs to cached songs
-      songs.forEach((song) => {
-        state.cachedSongs[song.trackId] = song
-      })
     })
   },
 })

@@ -5,7 +5,7 @@ export const SearchBar = styled.div`
   width: 100%;
   z-index: 10;
   top: 0;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   background-color: white;
   display: flex;
   justify-content: center;
