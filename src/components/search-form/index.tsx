@@ -29,6 +29,7 @@ export default function SearchBox() {
     <SearchBar>
       <SearchForm onSubmit={handleSubmit}>
         <SearchInput
+          placeholder="Search"
           ref={inputRef}
           type="text"
           name="term"

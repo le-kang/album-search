@@ -43,7 +43,7 @@ export const searchAlbums = createAsyncThunk(
 export const searchAlbumWithSongs = createAsyncThunk(
   'search/AlbumWithSongs',
   async (albumId: number) => {
-    const response = await fetch(SONG_API_URL + encodeURIComponent(albumId))
+    const response = await fetch(SONG_API_URL + albumId)
     const data = JSON.parse(await response.text()) as {
       resultCount: number
       results: (AlbumData | SongData)[]
@@ -51,7 +51,7 @@ export const searchAlbumWithSongs = createAsyncThunk(
     return {
       album: data.results.find(
         (entity) => entity.wrapperType === 'collection'
-      )! as AlbumData,
+      ) as AlbumData | undefined,
       songs: data.results.filter(
         (entity) => entity.wrapperType === 'track'
       ) as SongData[],

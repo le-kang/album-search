@@ -31,6 +31,7 @@ const cacheSlice = createSlice({
       const { album, songs } = action.payload
       // update fetched album in cached albums in case this album was never
       // appeared in the search result
+      if (!album) return
       state.cachedAlbums[album.collectionId] = album
       // update fetched album with its songs
       state.cachedAlbums[album.collectionId]['songs'] = songs.sort(
