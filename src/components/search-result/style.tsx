@@ -22,3 +22,13 @@ export const ResultContainer = styled.div`
     grid-template-columns: repeat(5, 1fr);
   `)}
 `
+
+export const NoFound = styled.p`
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+`

@@ -11,19 +11,20 @@ const SONG_API_URL =
 type Search = {
   term: string
   searching: boolean
-  results: AlbumData[]
+  results: AlbumData[] | null
 }
 
 const initialState: Search = {
   term: '',
   searching: false,
-  results: [],
+  results: null,
 }
 
 export const processSearchKeywords = (keywords: string) =>
   keywords
     .split(' ')
     .filter((word) => !!word)
+    .map((word) => word.toLowerCase())
     .join('+')
 
 export const searchAlbums = createAsyncThunk(
@@ -65,7 +66,7 @@ const searchSlice = createSlice({
     updateSearchTerm: (state, action: PayloadAction<string>) => {
       state.term = action.payload
       // clear search results if term is changed
-      state.results = []
+      state.results = null
     },
   },
   extraReducers: (builder) => {

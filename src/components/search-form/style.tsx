@@ -28,6 +28,7 @@ export const SearchForm = styled.form`
 `
 
 export const SearchInput = styled.input`
+  width: 100%;
   height: 50px;
   flex-grow: 1;
   font-size: 1.5rem;
