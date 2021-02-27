@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import App from './App'
-import store from './redux-store'
+import store, { persistor } from './redux-store'
 
 import GlobalStyle from './global.style'
 
@@ -13,8 +14,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <GlobalStyle />
-        <App />
+        <PersistGate persistor={persistor}>
+          <GlobalStyle />
+          <App />
+        </PersistGate>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
